@@ -2,9 +2,10 @@
   "name": "apiv3",
   "version": "1.0.0",
   "description": "",
-  "main": "functions/index.js",
+  "main": "index.js",
   "scripts": {
-    "build": "netlify deploy --prod"
+    "start": "NODE_ENV=development ./node_modules/.bin/netlify-lambda serve src",
+    "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src"
   },
   "keywords": [],
   "author": "",

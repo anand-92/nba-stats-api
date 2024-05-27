@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
 const fetch = require("node-fetch");
+const serverless = require('serverless-http');
+const router = express.Router();
 
 const cors = require("cors");
-app.use(cors({
+router.use(cors({
         origin: '*'
 }));
 
-app.get("/player/:name/seasonStats", async (req, res) => {
+router.get("/player/:name/seasonStats", async (req, res) => {
         const requestOptions = {
             method: 'GET',
                 headers: {
@@ -45,6 +47,5 @@ app.get("/player/:name/seasonStats", async (req, res) => {
         return response;
 });
 
-app.listen(8081, function () {
-    console.log("Example app listening at http://127.0.0.1:8081");
-});
+app.use('/.netlify/functions/api', router);
+module.exports.handler = serverless(app);
